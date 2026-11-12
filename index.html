@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Мясной творец — колбасы и мясные деликатесы</title>
+<style>
+:root{--maroon:#7a2e2e;--dark:#3a2323;--cream:#faf3ec;--accent:#b3472f;--text:#3d3230;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:Georgia,'Times New Roman',serif;color:var(--text);background:var(--cream);line-height:1.6;}
+.container{max-width:1100px;margin:0 auto;padding:0 20px;}
+header{background:var(--dark);color:#fff;padding:14px 0;position:sticky;top:0;z-index:50;}
+.header-inner{display:flex;align-items:center;justify-content:space-between;}
+.logo{font-size:1.4em;letter-spacing:.5px;cursor:pointer;user-select:none;}
+.logo span{color:#e8b64c;}
+nav a{color:#f3e6d8;text-decoration:none;margin-left:22px;font-size:.95em;}
+nav a:hover{color:#e8b64c;}
+.hero{background:linear-gradient(rgba(40,20,15,.75),rgba(40,20,15,.75)),url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120"><rect width="120" height="120" fill="%236b4a3a"/></svg>');background-size:cover;color:#fff;text-align:center;padding:90px 20px;}
+.hero h1{font-size:2.4em;max-width:760px;margin:0 auto 18px;}
+.hero p{max-width:640px;margin:0 auto 30px;font-size:1.1em;color:#f2e3d5;}
+.btn{display:inline-block;background:var(--accent);color:#fff;padding:13px 34px;border:none;border-radius:30px;font-size:1.05em;cursor:pointer;text-decoration:none;font-family:inherit;transition:background .2s;}
+.btn:hover{background:var(--maroon);}
+.btn-outline{background:transparent;border:1.5px solid var(--accent);color:var(--accent);}
+.btn-outline:hover{background:var(--accent);color:#fff;}
+section{padding:64px 0;}
+h2{font-size:1.9em;color:var(--dark);text-align:center;margin-bottom:36px;}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:24px;}
+.card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.08);display:flex;flex-direction:column;}
+.card img{width:100%;height:180px;object-fit:cover;background:#e8ddd2;}
+.card-body{padding:16px;flex:1;display:flex;flex-direction:column;}
+.card-body h3{font-size:1.1em;margin-bottom:6px;color:var(--dark);}
+.card-body .desc{font-size:.9em;flex:1;}
+.card-body .price{font-size:1.2em;color:var(--maroon);font-weight:bold;margin:10px 0;}
+.card-body .btn{padding:9px 0;text-align:center;font-size:.95em;}
+.adv{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px;}
+.adv-item{background:#fff;border-radius:12px;padding:26px;box-shadow:0 3px 10px rgba(0,0,0,.07);}
+.adv-item h3{color:var(--maroon);margin-bottom:10px;font-size:1.15em;}
+.about{background:#fff;border-radius:14px;padding:40px;box-shadow:0 3px 12px rgba(0,0,0,.07);max-width:860px;margin:0 auto;}
+.about p{margin-bottom:14px;font-size:1.05em;}
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;}
+.g-item{position:relative;border-radius:10px;overflow:hidden;aspect-ratio:1;background:#e8ddd2;display:flex;align-items:center;justify-content:center;color:#a08c7d;font-size:.9em;text-align:center;padding:10px;}
+.g-item img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.g-cap{position:absolute;bottom:0;left:0;right:0;background:rgba(40,20,15,.65);color:#fff;font-size:.85em;padding:8px;text-align:center;}
+.order{background:var(--dark);color:#fff;}
+.order h2{color:#f3e6d8;}
+.order-inner{max-width:560px;margin:0 auto;background:rgba(255,255,255,.07);padding:34px;border-radius:14px;}
+.order-inner p{margin-bottom:22px;text-align:center;color:#f2e3d5;}
+label{display:block;margin-bottom:6px;font-size:.95em;}
+input,select,textarea{width:100%;padding:11px;border:1px solid #c9b8a8;border-radius:8px;font-family:inherit;font-size:1em;background:#fff;margin-bottom:16px;}
+.order input,.order select,.order textarea{border:none;}
+.chk{display:flex;align-items:flex-start;gap:8px;font-size:.85em;margin-bottom:18px;}
+.chk input{width:auto;margin:0;}
+.order .btn{width:100%;}
+footer{background:var(--dark);color:#d9c8bb;padding:44px 0 24px;font-size:.95em;}
+.foot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:26px;margin-bottom:26px;}
+footer h4{color:#fff;margin-bottom:10px;}
+footer a{color:#e8b64c;text-decoration:none;}
+.foot-legal{border-top:1px solid rgba(255,255,255,.15);padding-top:16px;font-size:.8em;color:#a89383;}
+.foot-bottom{text-align:center;font-size:.85em;margin-top:10px;color:#c4ae9c;}
+/* ==== ADMIN ==== */
+#admin{display:none;position:fixed;inset:0;background:rgba(20,10,8,.6);z-index:100;overflow:auto;padding:30px 10px;}
+.admin-box{background:#fff;max-width:960px;margin:0 auto;border-radius:14px;padding:26px;box-shadow:0 10px 40px rgba(0,0,0,.4);}
+.admin-box h2{text-align:left;margin-bottom:8px;font-size:1.5em;}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0;border-bottom:2px solid #eee;}
+.tab{padding:9px 18px;cursor:pointer;border-radius:8px 8px 0 0;background:#f4ede6;font-size:.95em;}
+.tab.active{background:var(--maroon);color:#fff;}
+.admin-field{margin-bottom:14px;}
+.admin-field input,.admin-field textarea,.admin-field select{margin-bottom:4px;}
+.admin-field small{color:#8a7a6d;}
+.adm-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media(max-width:640px){.adm-row{grid-template-columns:1fr;}}
+.prod-edit{border:1px solid #e6dcd2;border-radius:10px;padding:16px;margin-bottom:14px;background:#faf7f3;}
+.prod-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.prod-photo{width:70px;height:54px;object-fit:cover;border-radius:6px;vertical-align:middle;margin-right:8px;background:#e8ddd2;}
+.inline-btn{padding:5px 12px;border:none;border-radius:6px;cursor:pointer;font-size:.85em;margin-left:6px;font-family:inherit;}
+.btn-red{background:#c0392b;color:#fff;}
+.btn-gray{background:#9c8d80;color:#fff;}
+.btn-green{background:#3e7d4e;color:#fff;}
+.gal-slot{display:inline-block;width:110px;margin:6px;text-align:center;font-size:.8em;}
+.gal-slot img{width:100px;height:80px;object-fit:cover;border-radius:6px;background:#e8ddd2;display:block;margin:0 auto 4px;cursor:pointer;}
+.note{background:#fff6de;border:1px solid #ecd88f;border-radius:8px;padding:10px 14px;font-size:.88em;margin-bottom:16px;}
+.login-box{max-width:380px;margin:60px auto;background:#fff;border-radius:14px;padding:30px;box-shadow:0 10px 40px rgba(0,0,0,.4);text-align:center;}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--dark);color:#fff;padding:12px 26px;border-radius:30px;z-index:200;opacity:0;transition:opacity .3s;pointer-events:none;}
+.toast.show{opacity:1;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <div class="logo" id="logo" title="Кликните 3 раза для входа в админ-панель">🥩 <b>Мясной <span>творец</span></b></div>
+    <nav>
+      <a href="#hits">Каталог</a>
+      <a href="#about">О производстве</a>
+      <a href="#gallery">Галерея</a>
+      <a href="#order">Контакты</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <h1 id="heroTitle"></h1>
+  <p id="heroSubtitle"></p>
+  <a class="btn" href="#hits" id="heroBtn">Выбрать колбасу</a>
+</div>
+
+<section id="hits">
+  <div class="container">
+    <h2>Наши хиты</h2>
+    <div class="cards" id="hitsGrid"></div>
+  </div>
+</section>
+
+<section id="advantages" style="background:#f4e9dd;">
+  <div class="container">
+    <h2>Наши преимущества</h2>
+    <div class="adv" id="advGrid"></div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <h2>О производстве</h2>
+    <div class="about" id="aboutText"></div>
+  </div>
+</section>
+
+<section id="delivery" style="background:#f4e9dd;">
+  <div class="container">
+    <h2>Доставка и покупка в магазине</h2>
+    <div class="about" id="deliveryText"></div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="container">
+    <h2>Наша продукция</h2>
+    <div class="gallery-grid" id="galleryGrid"></div>
+  </div>
+</section>
+
+<section class="order" id="order">
+  <div class="container">
+    <h2>Связаться с нами</h2>
+    <div class="order-inner">
+      <p id="formTitle"></p>
+      <form id="orderForm">
+        <label for="fName">Имя *</label>
+        <input id="fName" required placeholder="Ваше имя">
+        <label for="fPhone">Телефон *</label>
+        <input id="fPhone" type="tel" required placeholder="+7 (___) ___-__-__">
+        <label for="fTopic">Что вас интересует</label>
+        <select id="fTopic">
+          <option>Оформить заказ</option>
+          <option>Узнать о доставке</option>
+          <option>Оптовая закупка</option>
+          <option>Другое</option>
+        </select>
+        <label for="fMsg">Комментарий</label>
+        <textarea id="fMsg" rows="3" placeholder="Например: нужна нарезка для праздника"></textarea>
+        <div class="chk"><input type="checkbox" id="fAgree" required><label for="fAgree" style="margin:0;">Согласен(на) на обработку персональных данных</label></div>
+        <button type="submit" class="btn" id="formBtn">Перезвоните мне</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <h4>Контакты</h4>
+        <p id="footAddress"></p>
+        <p id="footPhone"></p>
+        <p id="footEmail"></p>
+      </div>
+      <div>
+        <h4>Мы в соцсетях</h4>
+        <p>ВКонтакте · Telegram · Одноклассники · WhatsApp</p>
+      </div>
+    </div>
+    <div class="foot-legal" id="footLegal"></div>
+    <div class="foot-bottom" id="footBottom"></div>
+  </div>
+</footer>
+
+<!-- ===== ADMIN ===== -->
+<div id="admin">
+  <div class="login-box" id="loginBox" style="display:none;">
+    <h2 style="text-align:center;">Админ-панель</h2>
+    <p style="margin-bottom:16px;">Введите пароль администратора</p>
+    <input type="password" id="admPass" placeholder="Пароль">
+    <button class="btn" onclick="tryLogin()" style="width:100%;">Войти</button>
+    <button class="inline-btn btn-gray" style="margin-top:12px;" onclick="closeAdmin()">Отмена</button>
+  </div>
+
+  <div class="admin-box" id="adminBox" style="display:none;">
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+      <h2>⚙️ Админ-панель «Мясной творец»</h2>
+      <button class="inline-btn btn-gray" onclick="closeAdmin()">Закрыть ✕</button>
+    </div>
+    <p><small>Все изменения сохраняются автоматически и сразу видны на странице.</small></p>
+
+    <div class="tabs">
+      <div class="tab active" data-tab="products" onclick="switchTab('products')">Товары</div>
+      <div class="tab" data-tab="texts" onclick="switchTab('texts')">Тексты сайта</div>
+      <div class="tab" data-tab="gallery" onclick="switchTab('gallery')">Галерея</div>
+      <div class="tab" data-tab="settings" onclick="switchTab('settings')">Настройки</div>
+    </div>
+
+    <!-- Товары -->
+    <div id="tab-products">
+      <button class="btn" style="padding:9px 22px;font-size:.95em;" onclick="addProduct()">+ Добавить товар (осталось слотов: <span id="slotsLeft"></span>)</button>
+      <div id="prodList" style="margin-top:16px;"></div>
+    </div>
+
+    <!-- Тексты -->
+    <div id="tab-texts" style="display:none;">
+      <div class="note">Меняйте любые тексты сайта — они обновятся сразу после сохранения.</div>
+
+      <h3 style="margin:10px 0;">Hero-блок (шапка)</h3>
+      <div class="admin-field"><label>Заголовок</label><input id="t_heroTitle"></div>
+      <div class="admin-field"><label>Подзаголовок</label><textarea id="t_heroSubtitle" rows="2"></textarea></div>
+      <div class="admin-field"><label>Текст на кнопке hero</label><input id="t_heroBtn"></div>
+
+      <h3 style="margin:18px 0 10px;">Преимущества</h3>
+      <div class="adm-row">
+        <div class="admin-field"><label>Преимущество 1 — название</label><input id="t_adv1t"></div>
+        <div class="admin-field"><label>Описание</label><textarea id="t_adv1x" rows="3"></textarea></div>
+        <div class="admin-field"><label>Преимущество 2 — название</label><input id="t_adv2t"></div>
+        <div class="admin-field"><label>Описание</label><textarea id="t_adv2x" rows="3"></textarea></div>
+        <div class="admin-field"><label>Преимущество 3 — название</label><input id="t_adv3t"></div>
+        <div class="admin-field"><label>Описание</label><textarea id="t_adv3x" rows="3"></textarea></div>
+      </div>
+
+      <h3 style="margin:18px 0 10px;">О производстве</h3>
+      <div class="admin-field"><label>Текст блока</label><textarea id="t_about" rows="6"></textarea><small>Абзацы разделяйте пустой строкой.</small></div>
+
+      <h3 style="margin:18px 0 10px;">Доставка</h3>
+      <div class="adm-row">
+        <div class="admin-field"><label>Стоимость доставки, ₽</label><input id="t_delivCost" type="number" min="0"></div>
+        <div class="admin-field"><label>Бесплатно от суммы, ₽ (0 — нет)</label><input id="t_delivFree" type="number" min="0"></div>
+      </div>
+      <div class="admin-field"><label>Текст блока «Доставка и покупка в магазине»</label><textarea id="t_deliveryText" rows="5"></textarea></div>
+
+      <h3 style="margin:18px 0 10px;">Форма заявки</h3>
+      <div class="admin-field"><label>Текст над формой</label><textarea id="t_formTitle" rows="2"></textarea></div>
+      <div class="admin-field"><label>Текст на кнопке формы</label><input id="t_formBtn"></div>
+
+      <h3 style="margin:18px 0 10px;">Подвал</h3>
+      <div class="adm-row">
+        <div class="admin-field"><label>Адрес</label><input id="t_footAddress"></div>
+        <div class="admin-field"><label>Телефон</label><input id="t_footPhone"></div>
+      </div>
+      <div class="admin-field"><label>Почта</label><input id="t_footEmail"></div>
+      <div class="admin-field"><label>Юридическая строка</label><textarea id="t_footLegal" rows="3"></textarea></div>
+      <div class="admin-field"><label>Строка внизу (копирайт)</label><input id="t_footBottom"></div>
+
+      <button class="btn btn-green" onclick="saveTexts()">Сохранить тексты</button>
+    </div>
+
+    <!-- Галерея -->
+    <div id="tab-gallery" style="display:none;">
+      <div class="note">20 мест под фото мясной продукции. Кликните по слоту, чтобы загрузить фото; подпись вводится под фото. Чтобы убрать фото — нажмите «✕».</div>
+      <div id="galList"></div>
+    </div>
+
+    <!-- Настройки -->
+    <div id="tab-settings" style="display:none;">
+      <h3 style="margin-bottom:10px;">Смена пароля администратора</h3>
+      <div class="adm-row">
+        <div class="admin-field"><label>Текущий пароль</label><input type="password" id="oldPass"></div>
+        <div class="admin-field"><label>Новый пароль</label><input type="password" id="newPass"></div>
+      </div>
+      <button class="btn btn-green" onclick="changePass()">Сменить пароль</button>
+
+      <h3 style="margin:26px 0 10px;">Сброс данных</h3>
+      <p style="margin-bottom:12px;font-size:.9em;">Вернуть товары, фото и тексты к исходным значениям. Действие необратимо.</p>
+      <button class="btn btn-red" onclick="resetAll()">Сбросить всё к стандартным данным</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const STORE_KEY = 'mt_site_data_v2';
+const MAX_PRODUCTS = 20;
+const MAX_GALLERY = 20;
+
+const DEFAULTS = {
+  pass: 'admin2026',
+  texts: {
+    heroTitle: 'Колбасы и мясные деликатесы, которым доверяют всей семьёй',
+    heroSubtitle: 'Готовим по традиционным рецептам из мяса, специй и ничего лишнего. Доставим к вашему столу свежим — в день заказа или купите в нашем магазине по адресу: г. Свободный, ул. Вокзальная, 39.',
+    heroBtn: 'Выбрать колбасу',
+    adv1t: 'Мясо от проверенных хозяйств',
+    adv1x: 'Мы знаем своих поставщиков лично и работаем с ними годами. Каждая партия мяса проходит входной контроль — на прилавок попадает только то, что одобрил наш технолог.',
+    adv2t: 'Никаких «улучшителей»',
+    adv2x: 'В составе — мясо, соль, специи и натуральная оболочка. Полный состав указан на каждой упаковке, и он совпадает с тем, что написано на сайте.',
+    adv3t: 'Доставка и покупка в магазине',
+    adv3x: 'Заказ до 12:00 — привезём сегодня, до 20:00 — завтра. Или приходите лично: наш магазин находится по адресу г. Свободный, ул. Вокзальная, 39. Курьер привозит колбасу в термобоксе — даже в жару продукт доедет свежим.',
+    about: 'Наш цех работает в городе уже больше десяти лет — и за это время мы ни разу не изменили главному принципу: делать колбасу так, как делали бы для собственной семьи.\nРецепты мы берём классические, а мясо закупаем у хозяйств, которые знаем лично. Никаких соевых заменителей, красителей и «мясной обрези» в составе — только то, что написано на этикетке.\nКаждую партию проверяет наш технолог, а дату производства честно указываем на упаковке. Поэтому покупатели возвращаются к нам снова — и приводят соседей.',
+    delivCost: 300,
+    delivFree: 2000,
+    deliveryText: 'Заказ до 12:00 — привезём сегодня, до 20:00 — завтра. Стоимость доставки — {COST} ₽; при заказе от {FREE} ₽ доставим бесплатно. Курьер привозит колбасу в термобоксе, так что даже в жару продукт доедет свежим.\nА если хотите выбрать сами — приходите в наш магазин: г. Свободный, ул. Вокзальная, 39. Работаем ежедневно с 8:00 до 20:00.',
+    formTitle: 'Оставьте номер — перезвоним в течение 15 минут, ответим на вопросы, поможем собрать заказ или подскажем, какие новинки есть прямо сейчас в магазине на ул. Вокзальная, 39.',
+    formBtn: 'Перезвоните мне',
+    footAddress: 'г. Свободный, ул. Вокзальная, 39',
+    footPhone: '+7 (999) 165-28-03 — ежедневно с 8:00 до 20:00',
+    footEmail: '',
+    footLegal: 'ИП Иванов И. И., ИНН 000000000000, ОГРНИП 000000000000000. Все цены на сайте указаны с учётом упаковки и могут меняться — актуальную стоимость уточняйте у менеджера.',
+    footBottom: '© 2026 «Мясной творец». Доставка свежей колбасы по городу и розничная продажа в магазине по ул. Вокзальная, 39.'
+  },
+  products: [
+    {name:'Краковская домашняя', desc:'Копчёная, с выразительным ароматом и пряной нотой', price:'690 ₽/кг', photo:null, visible:true},
+    {name:'Докторская классическая', desc:'Нежная, молочная — та самая, из детства', price:'520 ₽/кг', photo:null, visible:true},
+    {name:'Салями «Итальянская»', desc:'Выдержанная, для пиццы и сырной доски', price:'780 ₽/кг', photo:null, visible:true},
+    {name:'Буженина в собственном соку', desc:'Кусок свинины, запечённый с чесноком и перцем', price:'740 ₽/кг', photo:null, visible:true}
+  ],
+  gallery: Array.from({length:MAX_GALLERY}, () => ({photo:null, caption:''}))
+};
+
+let DATA;
+try { DATA = JSON.parse(localStorage.getItem(STORE_KEY)) || null; } catch(e){ DATA = null; }
+if (!DATA) DATA = JSON.parse(JSON.stringify(DEFAULTS));
+// гарантируем структуру
+DATA.texts = Object.assign({}, DEFAULTS.texts, DATA.texts || {});
+if (!Array.isArray(DATA.products)) DATA.products = JSON.parse(JSON.stringify(DEFAULTS.products));
+if (!Array.isArray(DATA.gallery) || DATA.gallery.length < MAX_GALLERY) {
+  const g = DATA.gallery || [];
+  while (g.length < MAX_GALLERY) g.push({photo:null, caption:''});
+  DATA.gallery = g.slice(0, MAX_GALLERY);
+}
+if (!DATA.pass) DATA.pass = DEFAULTS.pass;
+
+function save(){ localStorage.setItem(STORE_KEY, JSON.stringify(DATA)); }
+
+function esc(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+function render(){
+  const t = DATA.texts;
+  document.getElementById('heroTitle').textContent = t.heroTitle;
+  document.getElementById('heroSubtitle').textContent = t.heroSubtitle;
+  document.getElementById('heroBtn').textContent = t.heroBtn;
+  document.getElementById('footAddress').innerHTML = 'Магазин: ' + esc(t.footAddress);
+  document.getElementById('footPhone').innerHTML = 'Телефон: <a href="tel:' + esc(t.footPhone.split('—')[0].trim().replace(/[^+\d]/g,'')) + '">' + esc(t.footPhone) + '</a>';
+  const em = document.getElementById('footEmail');
+  if (t.footEmail) em.innerHTML = 'Почта: <a href="mailto:' + esc(t.footEmail) + '">' + esc(t.footEmail) + '</a>'; else em.textContent = '';
+  document.getElementById('footLegal').textContent = t.footLegal;
+  document.getElementById('footBottom').textContent = t.footBottom;
+  document.getElementById('formTitle').textContent = t.formTitle;
+  document.getElementById('formBtn').textContent = t.formBtn;
+
+  const dt = (t.deliveryText || '').replace('{COST}', t.delivCost).replace('{FREE}', t.delivFree);
+  const dEl = document.getElementById('deliveryText');
+  dEl.innerHTML = dt.split('\n').map(p => '<p>' + esc(p) + '</p>').join('');
+
+  const aEl = document.getElementById('aboutText');
+  aEl.innerHTML = (t.about||'').split('\n').filter(Boolean).map(p => '<p>' + esc(p) + '</p>').join('');
+
+  document.getElementById('advGrid').innerHTML =
+    '<div class="adv-item"><h3>' + esc(t.adv1t) + '</h3><p>' + esc(t.adv1x) + '</p></div>' +
+    '<div class="adv-item"><h3>' + esc(t.adv2t) + '</h3><p>' + esc(t.adv2x) + '</p></div>' +
+    '<div class="adv-item"><h3>' + esc(t.adv3t) + '</h3><p>' + esc(t.adv3x) + '</p></div>';
+
+  const visible = DATA.products.filter(p => p.visible);
+  document.getElementById('hitsGrid').innerHTML = visible.map((p, i) =>
+    '<div class="card">' +
+    (p.photo ? '<img src="' + p.photo + '" alt="">' : '<img alt="" src="data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="300" height="180"><rect width="300" height="180" fill="#e8ddd2"/><text x="150" y="95" text-anchor="middle" fill="#a08c7d" font-size="14" font-family="Georgia">' + (p.name||'Фото') + '</text></svg>') + '">') +
+    '<div class="card-body"><h3>' + esc(p.name) + '</h3><div class="desc">' + esc(p.desc) + '</div>' +
+    '<div class="price">' + esc(p.price) + '</div>' +
+    '<button class="btn" onclick="addToCart(\'' + esc(p.name).replace(/'/g,"\\'") + '\')">В корзину</button></div></div>'
+  ).join('') || '<p style="text-align:center;color:#a08c7d;">Товары появятся здесь — добавьте их в админ-панели.</p>';
+
+  document.getElementById('galleryGrid').innerHTML = DATA.gallery.filter(g => g.photo).map(g =>
+    '<div class="g-item">' + (g.photo ? '<img src="' + g.photo + '" alt="">' : '') +
+    (g.caption ? '<div class="g-cap">' + esc(g.caption) + '</div>' : '') + '</div>'
+  ).join('') || '<p style="grid-column:1/-1;text-align:center;color:#a08c7d;">Фото добавит администратор в админ-панели.</p>';
+}
+
+function addToCart(name){
+  toast('«' + name + '» добавлен в заявку. Оформить заказ — по телефону или через форму ниже 🙂');
+  document.getElementById('order').scrollIntoView({behavior:'smooth'});
+}
+
+document.getElementById('orderForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  toast('Заявка отправлена! Перезвоним в течение 15 минут.');
+  this.reset();
+});
+
+/* ==== ADMIN ==== */
+let logged = false, logoClicks = 0, logoTimer = null;
+document.getElementById('logo').addEventListener('click', () => {
+  logoClicks++;
+  clearTimeout(logoTimer);
+  logoTimer = setTimeout(() => logoClicks = 0, 800);
+  if (logoClicks >= 3) { logoClicks = 0; openAdmin(); }
+});
+document.addEventListener('keydown', e => {
+  if (e.ctrlKey && e.shiftKey && (e.key === 'A' || e.key === 'a' || e.key === 'Ф' || e.key === 'ф')) { e.preventDefault(); openAdmin(); }
+  if (e.key === 'Escape') closeAdmin();
+});
+
+function openAdmin(){
+  document.getElementById('admin').style.display = 'block';
+  document.getElementById('loginBox').style.display = logged ? 'none' : 'block';
+  document.getElementById('adminBox').style.display = logged ? 'block' : 'none';
+  if (logged) fillAdmin();
+}
+function closeAdmin(){ document.getElementById('admin').style.display = 'none'; }
+function tryLogin(){
+  if (document.getElementById('admPass').value === DATA.pass) {
+    logged = true;
+    document.getElementById('admPass').value = '';
+    document.getElementById('loginBox').style.display = 'none';
+    document.getElementById('adminBox').style.display = 'block';
+    fillAdmin();
+  } else toast('Неверный пароль');
+}
+
+function switchTab(name){
+  ['products','texts','gallery','settings'].forEach(t => {
+    document.getElementById('tab-' + t).style.display = (t === name) ? 'block' : 'none';
+  });
+  document.querySelectorAll('.tab').forEach(el => el.classList.toggle('active', el.dataset.tab === name));
+}
+
+function fillAdmin(){ renderProdList(); fillTexts(); renderGallery(); }
+
+/* --- Товары --- */
+function renderProdList(){
+  const left = MAX_PRODUCTS - DATA.products.length;
+  document.getElementById('slotsLeft').textContent = left;
+  document.getElementById('prodList').innerHTML = DATA.products.map((p, i) =>
+    '<div class="prod-edit">' +
+    '<div class="prod-head"><div>' +
+    '<img class="prod-photo" id="pph' + i + '" src="' + (p.photo || 'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="70" height="54"><rect width="70" height="54" fill="#e8ddd2"/><text x="35" y="32" text-anchor="middle" fill="#a08c7d" font-size="9">нет фото</text></svg>')) + '">' +
+    '<button class="inline-btn btn-gray" onclick="pickPhoto(\'p\',' + i + ')">📷 Заменить фото</button>' +
+    '</div><div>' +
+    '<button class="inline-btn ' + (p.visible ? 'btn-green' : 'btn-gray') + '" onclick="toggleProd(' + i + ')">' + (p.visible ? 'Показывается' : 'Скрыт') + '</button>' +
+    '<button class="inline-btn btn-red" onclick="delProd(' + i + ')">Удалить</button>' +
+    '</div></div>' +
+    '<input placeholder="Название" value="' + esc(p.name) + '" oninput="updProd(' + i + ',\'name\',this.value)">' +
+    '<textarea rows="2" placeholder="Описание (30–50 символов)" oninput="updProd(' + i + ',\'desc\',this.value)">' + esc(p.desc) + '</textarea>' +
+    '<input placeholder="Цена, например 690 ₽/кг" value="' + esc(p.price) + '" oninput="updProd(' + i + ',\'price\',this.value)">' +
+    '</div>'
+  ).join('');
+}
+function addProduct(){
+  if (DATA.products.length >= MAX_PRODUCTS) { toast('Достигнут лимит — 20 товаров'); return; }
+  DATA.products.push({name:'', desc:'', price:'', photo:null, visible:true});
+  save(); renderProdList();
+}
+function updProd(i, field, val){ DATA.products[i][field] = val; save(); render(); }
+function delProd(i){ if (confirm('Удалить товар «' + DATA.products[i].name + '»?')) { DATA.products.splice(i,1); save(); renderProdList(); render(); } }
+function toggleProd(i){ DATA.products[i].visible = !DATA.products[i].visible; save(); renderProdList(); render(); }
+
+/* --- Тексты --- */
+function fillTexts(){
+  const t = DATA.texts;
+  const map = {heroTitle:'t_heroTitle', heroSubtitle:'t_heroSubtitle', heroBtn:'t_heroBtn',
+    adv1t:'t_adv1t', adv1x:'t_adv1x', adv2t:'t_adv2t', adv2x:'t_adv2x', adv3t:'t_adv3t', adv3x:'t_adv3x',
+    about:'t_about', delivCost:'t_delivCost', delivFree:'t_delivFree', deliveryText:'t_deliveryText',
+    formTitle:'t_formTitle', formBtn:'t_formBtn', footAddress:'t_footAddress', footPhone:'t_footPhone',
+    footEmail:'t_footEmail', footLegal:'t_footLegal', footBottom:'t_footBottom'};
+  for (const k in map) document.getElementById(map[k]).value = t[k] !== undefined ? t[k] : '';
+}
+function saveTexts(){
+  DATA.texts.heroTitle = document.getElementById('t_heroTitle').value;
+  DATA.texts.heroSubtitle = document.getElementById('t_heroSubtitle').value;
+  DATA.texts.heroBtn = document.getElementById('t_heroBtn').value;
+  DATA.texts.adv1t = document.getElementById('t_adv1t').value;
+  DATA.texts.adv1x = document.getElementById('t_adv1x').value;
+  DATA.texts.adv2t = document.getElementById('t_adv2t').value;
+  DATA.texts.adv2x = document.getElementById('t_adv2x').value;
+  DATA.texts.adv3t = document.getElementById('t_adv3t').value;
+  DATA.texts.adv3x = document.getElementById('t_adv3x').value;
+  DATA.texts.about = document.getElementById('t_about').value;
+  DATA.texts.delivCost = Number(document.getElementById('t_delivCost').value) || 0;
+  DATA.texts.delivFree = Number(document.getElementById('t_delivFree').value) || 0;
+  DATA.texts.deliveryText = document.getElementById('t_deliveryText').value;
+  DATA.texts.formTitle = document.getElementById('t_formTitle').value;
+  DATA.texts.formBtn = document.getElementById('t_formBtn').value;
+  DATA.texts.footAddress = document.getElementById('t_footAddress').value;
+  DATA.texts.footPhone = document.getElementById('t_footPhone').value;
+  DATA.texts.footEmail = document.getElementById('t_footEmail').value.trim();
+  DATA.texts.footLegal = document.getElementById('t_footLegal').value;
+  DATA.texts.footBottom = document.getElementById('t_footBottom').value;
+  save(); render(); toast('Тексты сохранены ✓');
+}
+
+/* --- Галерея --- */
+function renderGallery(){
+  document.getElementById('galList').innerHTML = DATA.gallery.map((g, i) =>
+    '<div class="gal-slot">' +
+    '<img id="gph' + i + '" src="' + (g.photo || 'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="100" height="80"><rect width="100" height="80" fill="#e8ddd2"/><text x="50" y="45" text-anchor="middle" fill="#a08c7d" font-size="9">слот ' + (i+1) + '</text></svg>')) + '" onclick="pickPhoto(\'g\',' + i + ')" title="Загрузить фото">' +
+    '<input style="width:110px;font-size:.8em;padding:5px;" placeholder="Подпись" value="' + esc(g.caption) + '" oninput="updGal(' + i + ',this.value)">' +
+    (g.photo ? '<button class="inline-btn btn-red" style="padding:2px 8px;font-size:.75em;" onclick="clearGal(' + i + ')">✕</button>' : '') +
+    '</div>'
+  ).join('');
+}
+function updGal(i, val){ DATA.gallery[i].caption = val; save(); render(); }
+function clearGal(i){ DATA.gallery[i].photo = null; save(); renderGallery(); render(); }
+
+/* --- Загрузка фото со сжатием --- */
+function pickPhoto(kind, i){
+  const inp = document.createElement('input');
+  inp.type = 'file'; inp.accept = 'image/*';
+  inp.onchange = () => {
+    const file = inp.files[0]; if (!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      const img = new Image();
+      img.onload = () => {
+        const max = kind === 'p' ? 700 : 600;
+        let w = img.width, h = img.height;
+        if (w > max) { h = h * max / w; w = max; }
+        const cv = document.createElement('canvas');
+        cv.width = w; cv.height = h;
+        cv.getContext('2d').drawImage(img, 0, 0, w, h);
+        const data = cv.toDataURL('image/jpeg', 0.8);
+        if (kind === 'p') DATA.products[i].photo = data; else DATA.gallery[i].photo = data;
+        save(); render();
+        if (kind === 'p') renderProdList(); else renderGallery();
+        toast('Фото загружено ✓');
+      };
+      img.src = ev.target.result;
+    };
+    reader.readAsDataURL(file);
+  };
+  inp.click();
+}
+
+/* --- Настройки --- */
+function changePass(){
+  const old = document.getElementById('oldPass').value, nw = document.getElementById('newPass').value;
+  if (old !== DATA.pass) { toast('Текущий пароль неверен'); return; }
+  if (nw.length < 5) { toast('Новый пароль — минимум 5 символов'); return; }
+  DATA.pass = nw; save();
+  document.getElementById('oldPass').value = ''; document.getElementById('newPass').value = '';
+  toast('Пароль изменён ✓');
+}
+function resetAll(){
+  if (!confirm('Сбросить ВСЕ данные (товары, фото, тексты) к стандартным?')) return;
+  DATA = JSON.parse(JSON.stringify(DEFAULTS));
+  save(); render(); fillAdmin(); toast('Данные сброшены');
+}
+
+/* --- Утилиты --- */
+function toast(msg){
+  const el = document.getElementById('toast');
+  el.textContent = msg; el.classList.add('show');
+  clearTimeout(el._t); el._t = setTimeout(() => el.classList.remove('show'), 2600);
+}
+
+render();
+</script>
+</body>
+</html>
